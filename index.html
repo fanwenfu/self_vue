@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1 id="name">{{name}}</h1>
+        <input id="input" type="text" oninput="upperCase(this.id)" >
+        <script src="./js/observe.js"></script>
+        <script src="./js/watcher.js"></script>
+        <script src="./js/index.js"></script>
+        <script type="text/javascript">
+            var ele = document.querySelector('#name');
+            var selfVue = new SelfVue({
+                name: 'hello world'
+            }, ele, 'name');
+    
+            function upperCase(){
+                var val = document.querySelector('#input').value;
+                selfVue.data.name = val;
+            }
+        </script>
+    
+    </body>
+</html>
