@@ -44,9 +44,9 @@ Compile.prototype = {
         });
     },
     compile: function(node) {
-        var nodeAttrs = node.attributes;
+        var attrs = node.attributes;
         var self = this;
-        Array.prototype.forEach.call(nodeAttrs, function(attr) {
+        [].slice.call(attrs).forEach(function(attr) {
             var attrName = attr.name;
             if (self.isDirective(attrName)) {
                 var exp = attr.value;
@@ -68,6 +68,7 @@ Compile.prototype = {
             self.updateText(node, value);
         });
     },
+    // v-on指令
     compileEvent: function (node, vm, exp, dir) {
         var eventType = dir.split(':')[1];
         var cb = vm.methods && vm.methods[exp];
@@ -76,6 +77,7 @@ Compile.prototype = {
             node.addEventListener(eventType, cb.bind(vm), false);
         }
     },
+    // v-model指令
     compileModel: function (node, vm, exp, dir) {
         var self = this;
         var val = this.vm[exp];

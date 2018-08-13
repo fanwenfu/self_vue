@@ -4,17 +4,30 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <title>简单实现vue数据双向绑定</title>
+        <style>
+            .layout{
+                max-width:350px;
+                margin:0 auto;
+            }
+            .title{
+                text-align: center;
+            }
+    
+        </style>
     </head>
     <body>
         <div id="app">
-            <h2>{{title}}</h2>
-            <input v-model="name">
-            <h1>{{name}}</h1>
-            <button v-on:click="clickMe">click me!</button>
+            <div class="layout">
+                    <h2 class="title"><span>{{title}}</span></h2>
+                    <p class="name">姓名：<input v-model="name"></p>
+                    <p class="name">年龄：<input v-model="age"></p>
+                    <p>v-model: <span>{{name}}</span></p>
+                    <p>修改年龄: <button v-on:click="clickMe">click me!</button></p>
+                    <p class="name">遍历dom：<span>{{name}}</span></p>
+            </div>
+           
         </div>
-
-        <!-- <input id="input" type="text" oninput="upperCase(this.id)" > -->
         <script src="./js/dep.js"></script>
         <script src="./js/observe.js"></script>
         <script src="./js/watcher.js"></script>
@@ -22,34 +35,24 @@
         <script src="./js/index.js"></script>
 
         <script type="text/javascript">
-            var ele = document.querySelector('#name');
-            var Vue = new Vue({
+            new Vue({
                 el:'#app',
                 data:{
-                    title: 'hello world',
-                    name: ''
+                    age: 0,
+                    name: '范'
                 },
                 methods: {
                     clickMe: function () {
-                        this.title = 'hello world';
+                        this.age +=1 ;
                     }
                 },
                 mounted: function () {
                     window.setTimeout(() => {
-                        this.title = '你好';
+                        this.age = 24;
                     }, 1000);
                 }
-                // exp:'name'
             });
-            function upperCase(){
-                var val = document.querySelector('#input').value;
-                // selfVue.data.name = val;
-                
-                Vue.name = val;
-                // getOwnPropertyNames:获取对象所有属性，包括不可枚举(enumerable:false)
-                // console.log(Object.getOwnPropertyNames(selfVue))
-                
-            }
+     
         </script>
     
     </body>
