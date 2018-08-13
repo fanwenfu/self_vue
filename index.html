@@ -7,20 +7,47 @@
         <title>Document</title>
     </head>
     <body>
-        <h1 id="name">{{name}}</h1>
-        <input id="input" type="text" oninput="upperCase(this.id)" >
+        <div id="app">
+            <h2>{{title}}</h2>
+            <input v-model="name">
+            <h1>{{name}}</h1>
+            <button v-on:click="clickMe">click me!</button>
+        </div>
+
+        <!-- <input id="input" type="text" oninput="upperCase(this.id)" > -->
         <script src="./js/observe.js"></script>
         <script src="./js/watcher.js"></script>
+        <script src="./js/compile.js"></script>
         <script src="./js/index.js"></script>
+
         <script type="text/javascript">
             var ele = document.querySelector('#name');
-            var selfVue = new SelfVue({
-                name: 'hello world'
-            }, ele, 'name');
-    
+            var Vue = new Vue({
+                el:'#app',
+                data:{
+                    title: 'hello world',
+                    name: ''
+                },
+                methods: {
+                    clickMe: function () {
+                        this.title = 'hello world';
+                    }
+                },
+                mounted: function () {
+                    window.setTimeout(() => {
+                        this.title = '你好';
+                    }, 1000);
+                }
+                // exp:'name'
+            });
             function upperCase(){
                 var val = document.querySelector('#input').value;
-                selfVue.data.name = val;
+                // selfVue.data.name = val;
+                
+                Vue.name = val;
+                // getOwnPropertyNames:获取对象所有属性，包括不可枚举(enumerable:false)
+                // console.log(Object.getOwnPropertyNames(selfVue))
+                
             }
         </script>
     
