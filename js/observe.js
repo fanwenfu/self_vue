@@ -14,7 +14,6 @@ function defineReactive(data,key,val) {
 			return val
 		},
 		set:function(newVal){
-			console.log('set')
 			if(val === newVal){
 				return
 			}
